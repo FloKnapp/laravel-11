@@ -1,3 +1,5 @@
+[![Tests](https://github.com/FloKnapp/laravel-11/actions/workflows/laravel.yml/badge.svg)](https://github.com/FloKnapp/laravel-11/actions/workflows/laravel.yml)
+
 # About this project
 
 This application makes it possible for epilepsy patients to track their episodes.
