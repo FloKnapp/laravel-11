@@ -1,3 +1,106 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="range"] {
+    @apply bg-gray-400 h-2 rounded-lg;
+    margin-top: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+    @apply bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer transition-all;
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+    @apply bg-gray-600;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    @apply bg-gray-700;
+}
+
+/* Stil für den Schieberegler (Handle) */
+input[type="range"]::-webkit-slider-thumb {
+    @apply bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    @apply bg-gray-600;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    @apply bg-gray-700;
+}
+
+/* Calendar */
+
+/* Border around each month */
+.fc .fc-multimonth {
+    border: none;
+}
+
+.fc .fc-multimonth-multicol .fc-multimonth-month {
+    @apply pl-0 border-0;
+}
+
+/* Displayed year */
+.fc .fc-toolbar-title {
+    @apply text-gray-200;
+}
+
+/* Displayed month */
+.fc .fc-multimonth-title {
+    @apply text-gray-200;
+}
+
+/* Background of the header */
+.fc .fc-multimonth-singlecol .fc-multimonth-header {
+    @apply bg-gray-800;
+}
+
+/* Border around the title of each column */
+.fc .fc-multimonth .fc-theme-standard th,
+.fc .fc-col-header-cell {
+    @apply border-0;
+}
+
+/* Title of each column (usually weekdays) */
+.fc .fc-col-header-cell.fc-day {
+    @apply text-gray-200 text-xs font-normal;
+}
+
+/* Background of day column */
+.fc .fc-daygrid .fc-scrollgrid {
+    @apply border-gray-800;
+}
+
+/* Background of day column */
+.fc .fc-daygrid .fc-day.fc-daygrid-day {
+    @apply bg-gray-900 text-xs text-gray-200 border-gray-800;
+}
+
+/* Background of day column when disabled */
+.fc .fc-daygrid .fc-day.fc-day-disabled {
+    @apply bg-gray-800;
+}
+
+/* Event link */
+.fc .fc-daygrid .fc-more-link {
+    @apply border-0 rounded-sm text-xs bg-blue-400 text-white shadow-none;
+}
+
+.fc .fc-popover {
+    @apply dark:border-gray-800 shadow-lg;
+}
+
+.fc .fc-popover-header {
+    @apply p-3 dark:bg-gray-800 dark:text-gray-200 dark:border-0;
+}
+
+.fc .fc-popover-body {
+    @apply dark:bg-gray-700;
+}
+
+.fc .fc-popover-body .fc-event {
+    @apply p-2 justify-between flex gap-3;
+}

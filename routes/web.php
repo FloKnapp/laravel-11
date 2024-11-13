@@ -1,11 +1,19 @@
 <?php
 
+use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
+use App\Models\Episode;
+use App\Models\EpisodeSymptom;
+use App\Models\EpisodeTrigger;
+use App\Models\EpisodeType;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WebsiteController::class, 'index'])->name('home');
+
+Route::post('/episode', [EpisodeController::class, 'store'])->name('episode.store');
+Route::get('/episode/{id}', [EpisodeController::class, 'show'])->name('episode.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
