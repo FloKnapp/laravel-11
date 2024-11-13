@@ -33,7 +33,7 @@
 
             <div id="episodes" class="pt-5">
 
-                <h2 class="text-2xl text-left pl-8">{{ __('Recent entries') }}</h2>
+                <h2 class="text-xl text-left pl-8">{{ __('Recent entries') }}</h2>
 
                 @foreach ($episodes as $episode)
                     <x-episode-item :episode="$episode" />
@@ -41,7 +41,7 @@
 
             </div>
 
-            <x-calendar :events="$events" />
+            <x-calendar :events="$events" class="min-h-80" />
 
         </div>
 

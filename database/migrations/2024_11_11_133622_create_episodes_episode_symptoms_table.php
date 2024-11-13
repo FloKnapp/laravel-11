@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('episodes_episode_symptoms', function (Blueprint $table) {
             $table->foreignId('episode_id')->constrained('episodes');
             $table->foreignId('episode_symptom_id')->constrained('episode_symptoms');
-            $table->unique(['episode_id', 'episode_symptom_id']);
+            $table->enum('timing', ['pre', 'during', 'post']);
+            $table->unique(['episode_id', 'episode_symptom_id', 'timing'], 'episode_symptom_unique');
             $table->timestamps();
         });
     }

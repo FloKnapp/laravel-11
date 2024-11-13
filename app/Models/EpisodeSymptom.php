@@ -20,6 +20,6 @@ class EpisodeSymptom extends Model
 
     public function episodes()
     {
-        return $this->belongsToMany(Episode::class, 'episodes_episode_symptoms')->withTimestamps();
+        return $this->belongsToMany(Episode::class, 'episodes_episode_symptoms')->withPivot('timing')->withTimestamps();
     }
 }
