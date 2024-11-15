@@ -1,1 +1,3 @@
-<h1 class="text-2xl">{{ $slot }}</h1>
+<h1 {{ $attributes->merge(['class' => 'text-2xl']) }}>
+    {{ $slot }}
+</h1>

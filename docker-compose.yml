@@ -38,7 +38,8 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
-            - 'sail-mariadb:/var/lib/mysql'
+            - './database/mariadb-data:/var/lib/mysql'
+#            - 'sail-mariadb:/var/lib/mysql'
             - './vendor/laravel/sail/database/mariadb/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
@@ -76,7 +77,7 @@ networks:
     sail:
         driver: bridge
 volumes:
-    sail-mariadb:
-        driver: local
+#    sail-mariadb:
+#        driver: local
     sail-redis:
         driver: local

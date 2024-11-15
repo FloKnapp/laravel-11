@@ -3,33 +3,33 @@
 @tailwind utilities;
 
 input[type="range"] {
-    @apply bg-gray-400 h-2 rounded-lg;
+    @apply bg-gray-300 dark:bg-gray-600 h-2 rounded-lg;
     margin-top: 0;
 }
 
 input[type="range"]::-moz-range-thumb {
-    @apply bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer transition-all;
+    @apply bg-gray-400 dark:bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer transition-all;
 }
 
 input[type="range"]:hover::-moz-range-thumb {
-    @apply bg-gray-600;
+    @apply bg-blue-400 dark:bg-blue-400;
 }
 
-input[type="range"]:focus::-moz-range-thumb {
-    @apply bg-gray-700;
+input[type="range"]:active::-moz-range-thumb {
+    @apply bg-blue-500 dark:bg-blue-500;
 }
 
 /* Stil für den Schieberegler (Handle) */
 input[type="range"]::-webkit-slider-thumb {
-    @apply bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer;
+    @apply bg-blue-400 dark:bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer;
 }
 
 input[type="range"]:hover::-webkit-slider-thumb {
-    @apply bg-gray-600;
+    @apply bg-blue-500 dark:bg-gray-600;
 }
 
-input[type="range"]:focus::-webkit-slider-thumb {
-    @apply bg-gray-700;
+input[type="range"]:active::-webkit-slider-thumb {
+    @apply bg-gray-700 dark:bg-gray-700;
 }
 
 /* Calendar */
@@ -45,17 +45,17 @@ input[type="range"]:focus::-webkit-slider-thumb {
 
 /* Displayed year */
 .fc .fc-toolbar-title {
-    @apply text-gray-200;
+    @apply text-gray-700 dark:text-gray-200;
 }
 
 /* Displayed month */
 .fc .fc-multimonth-title {
-    @apply text-gray-200;
+    @apply text-gray-700 dark:text-gray-200;
 }
 
 /* Background of the header */
 .fc .fc-multimonth-singlecol .fc-multimonth-header {
-    @apply bg-gray-800;
+    @apply bg-gray-100 dark:bg-gray-800;
 }
 
 /* Border around the title of each column */
@@ -66,22 +66,22 @@ input[type="range"]:focus::-webkit-slider-thumb {
 
 /* Title of each column (usually weekdays) */
 .fc .fc-col-header-cell.fc-day {
-    @apply text-gray-200 text-xs font-normal;
+    @apply text-gray-700 dark:text-gray-200 text-xs font-normal;
 }
 
 /* Background of day column */
 .fc .fc-daygrid .fc-scrollgrid {
-    @apply border-gray-800;
+    @apply border-gray-200 dark:border-gray-800;
 }
 
 /* Background of day column */
 .fc .fc-daygrid .fc-day.fc-daygrid-day {
-    @apply bg-gray-900 text-xs text-gray-200 border-gray-800;
+    @apply bg-gray-200 dark:bg-gray-900 text-xs text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-800;
 }
 
 /* Background of day column when disabled */
 .fc .fc-daygrid .fc-day.fc-day-disabled {
-    @apply bg-gray-800;
+    @apply bg-gray-100 dark:bg-gray-800;
 }
 
 /* Event link */
@@ -103,4 +103,8 @@ input[type="range"]:focus::-webkit-slider-thumb {
 
 .fc .fc-popover-body .fc-event {
     @apply p-2 justify-between flex gap-3;
+}
+
+.fc .fc-button-primary {
+    @apply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-100 border-transparent
 }

@@ -15,29 +15,29 @@
         <x-input-error :messages="$errors->get('type')" />
     </fieldset>
 
-    <fieldset class="mt-3">
+    <fieldset class="mt-3 relative">
         <legend class="py-3 text-gray-900 dark:text-gray-400">Symptome</legend>
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <x-input-checkbox name="symptoms[aura]" value="aura" label="{{ __('aura') }}" x-on:change="$dispatch('show-additional', 'symptoms[aura][timing]')" />
                 <x-input-additional name="symptoms[aura][timing]" />
-                <x-input-error :messages="$errors->get('symptoms.aura.timing')" />
             </div>
             <div>
                 <x-input-checkbox name="symptoms[unconsciousness]" value="unconsciousness" label="{{ __('unconsciousness') }}" x-on:change="$dispatch('show-additional', 'symptoms[unconsciousness][timing]')" />
                 <x-input-additional name="symptoms[unconsciousness][timing]" />
-                <x-input-error :messages="$errors->get('symptoms.unconsciousness.timing')" />
             </div>
         </div>
         <x-input-error :messages="$errors->get('symptoms')" />
+        <x-input-error :messages="$errors->get('symptoms.aura.timing')" />
+        <x-input-error :messages="$errors->get('symptoms.unconsciousness.timing')" />
     </fieldset>
 
     <fieldset class="mt-3">
         <legend class="py-3 text-gray-900 dark:text-gray-400">Auslöser</legend>
         <div class="grid grid-cols-3 gap-4">
-            <x-input-checkbox name="triggers[]" value="menstruation" label="{{ __('menstruation') }}" />
-            <x-input-checkbox name="triggers[]" value="sleep_deprivation" label="{{ __('sleep_deprivation') }}" />
-            <x-input-checkbox name="triggers[]" value="nothing" label="{{ __('nothing') }}" />
+            <x-input-checkbox name="triggers[menstruation]" value="menstruation" label="{{ __('menstruation') }}" />
+            <x-input-checkbox name="triggers[sleep_deprivation]" value="sleep_deprivation" label="{{ __('sleep_deprivation') }}" />
+            <x-input-checkbox name="triggers[nothing]" value="nothing" label="{{ __('nothing') }}" />
         </div>
         <x-input-error :messages="$errors->get('triggers')" />
     </fieldset>
@@ -62,7 +62,7 @@
 
             <fieldset class="mt-3">
                 <legend class="py-3 text-gray-900 dark:text-gray-400">Datum</legend>
-                <x-input-datetime name="published_at" />
+                <x-input-datetime class="border-gray-300" name="published_at" />
                 <x-input-error :messages="$errors->get('published_at')" />
             </fieldset>
 

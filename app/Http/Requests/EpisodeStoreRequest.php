@@ -16,11 +16,11 @@ class EpisodeStoreRequest extends FormRequest
     {
         return [
             'intensity' => 'nullable|integer|between:0,10',
-            'duration' => 'nullable|integer|between:1,600',
+            'duration' => 'nullable|integer|between:0,600',
             'published_at' => 'nullable|date',
             'type' => 'required|string',
             'symptoms' => 'required|array|min:1',
-            'symptoms.*.timing' => 'required|string',
+            'symptoms.aura.timing' => 'required|string',
             'triggers' => [
                 'required',
                 function($attribute, $value, $fail) {

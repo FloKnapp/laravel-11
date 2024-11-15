@@ -20,6 +20,7 @@ class WebsiteController extends Controller
             $events[] = [
                 'title' => __($episode->types()->first()->name),
                 'start' => $episode->created_at,
+                'url' => route('episode.show', $episode->public_id),
                 'end' => $episode->created_at->addSeconds($episode->duration),
             ];
         }

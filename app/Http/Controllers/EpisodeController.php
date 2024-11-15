@@ -22,7 +22,7 @@ class EpisodeController extends Controller
      */
     public function show(string $publicId): View
     {
-        $episode = Episode::findOrFail($publicId, 'public_id');
+        $episode = Episode::where('public_id', '=', $publicId)->firstOrFail();
         return view('episode-details', compact('episode'));
     }
 

@@ -34,6 +34,9 @@
                     //slotMinTime: '8:00:00',
                     //slotMaxTime: '19:00:00',
                     events: @json($events),
+                    eventClick: function(info) {
+                        console.log(info);
+                    }
                 });
                 calendar.render();
             });

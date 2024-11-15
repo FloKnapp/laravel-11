@@ -7,6 +7,7 @@ return [
         'symptoms' => ' Symptom',
         'triggers' => 'en Auslöser',
         'type' => 'e Art des Anfalls',
-        'duration' => 'e ungefähre Zeit'
+        'duration' => 'e ungefähre Zeit',
+        'symptoms.*.timing' => 'en Zeitpunkt'
     ]
 ];

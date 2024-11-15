@@ -20,7 +20,7 @@
             <span>Symptome:</span>
             <span>
             @foreach ($episode->symptoms as $symptom)
-                {{ __($symptom->name) }}@if ($episode->symptoms->count() > 1 && $episode->symptoms->last() === $symptom), @endif
+                {{ __($symptom->symptom->name) }}@if ($episode->symptoms->count() > 1 && $episode->symptoms->last() === $symptom), @endif
             @endforeach
             </span>
         </div>

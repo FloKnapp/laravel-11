@@ -6,15 +6,16 @@
             $flashMessage = session('status');
         @endphp
 
-        <div class="absolute">{{ __($flashMessage) }}</div>
-
         <div class="p-4 sm:py-6 sm:p-8 bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
 
             <x-data-container class="text-gray-900 dark:text-gray-200">
 
-                <div class="grid grid-cols-3 justify-between items-center">
-                    <x-headline-primary>{{ __('Epilepsy-Tracker') }}</x-headline-primary>
-                    <x-current-time />
+                <div class="grid grid-cols-1 sm:grid-cols-3 justify-between items-center relative">
+                    <x-headline-primary class="hidden sm:block">{{ __('Epilepsy-Tracker') }}</x-headline-primary>
+                    <x-current-time class="hidden sm:block" />
+
+                    <x-flash-message>{{ __($flashMessage) }}</x-flash-message>
+
                     <div class="flex gap-2 justify-end">
                         <x-reload-button />
                         <x-theme-switch />

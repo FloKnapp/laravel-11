@@ -1,4 +1,4 @@
-<div class="text-center">
+<div {{ $attributes->merge(['class' => 'text-center']) }}>
 
     <span id="current-time" style="font-feature-settings: 'tnum'">{{ date('D, d.m.Y, H:i:s') }} Uhr</span>
 
@@ -8,7 +8,7 @@
 
             const formattedDate = (date) => {
                 // Monate und Wochentage in gewünschter Form festlegen
-                const days = ["Son", "Mon", "Die", "Mit", "Don", "Fre", "Sam"];
+                const days = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
                 const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
                 // Teile des Datums extrahieren
