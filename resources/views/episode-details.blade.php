@@ -36,7 +36,7 @@
 
         <div class="grid grid-cols-2 mt-2">
             <span>Dauer:</span>
-            <span>{{ $episode->duration ?? 0 }}</span>
+            <span>{{ formatDuration($episode->duration ?? 0) }}</span>
         </div>
 
         <div class="grid grid-cols-2 mt-2">

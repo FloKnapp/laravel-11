@@ -17,7 +17,8 @@ class Episode extends Model
     protected $fillable = [
         'public_id',
         'intensity',
-        'duration'
+        'duration',
+        'published_at'
     ];
 
     public function types()
@@ -27,7 +28,7 @@ class Episode extends Model
 
     public function symptoms()
     {
-        return $this->belongsToMany(EpisodeSymptom::class, 'episodes_episode_symptoms')->withPivot('timing')->withTimestamps();
+        return $this->belongsToMany(SymptomTiming::class, 'episodes_symptom_timings')->withTimestamps();
     }
 
     public function triggers()

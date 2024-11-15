@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('episode_symptoms', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->nullable(false);
+            $table->unique('name');
             $table->timestamps();
         });
     }

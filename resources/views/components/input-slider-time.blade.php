@@ -1,4 +1,4 @@
-<div class="w-full relative block relative grid grid-cols-3 col-1-xl gap-3 items-center space-x-4 p-4 sm:p-6 bg-gray-200 rounded-lg text-gray-900 dark:text-dark-600 font-bold" x-data="stopwatch()">
+<div class="w-full relative block relative grid grid-cols-3 col-1-xl gap-3 items-center space-x-4 p-4 sm:p-6 bg-gray-200 rounded-lg text-gray-900 dark:text-gray-200 dark:bg-gray-700 font-lighter text-shadow-0" x-data="stopwatch()">
 
     <div class="flex justify-items-center items-center col-span-2">
 
@@ -13,7 +13,7 @@
     </div>
 
     <!-- Label -->
-    <span id="duration-display" class="whitespace-nowrap text-sm font-bold text-right" style="font-feature-settings: 'tnum'" x-text="formatDuration(timeElapsed)"></span>
+    <span id="duration-display" class="whitespace-nowrap text-sm font-light text-right" style="font-feature-settings: 'tnum'" x-text="formatDuration(timeElapsed)"></span>
 
     @push('scripts')
 

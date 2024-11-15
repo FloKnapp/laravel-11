@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('episode_types', function (Blueprint $table) {
+        Schema::create('symptom_timings', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
-            $table->unique('name');
+            $table->foreignId('symptom_id')->constrained('episode_symptoms');
+            $table->foreignId('timing_id')->constrained('timings');
+            $table->unique(['symptom_id', 'timing_id']);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('episode_types');
+        Schema::dropIfExists('symptom_timings');
     }
 };

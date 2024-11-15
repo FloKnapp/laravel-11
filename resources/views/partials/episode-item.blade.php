@@ -24,7 +24,7 @@
         <div>
             <h2>Symptome</h2>
             @foreach ($episode->symptoms as $symptom)
-                <span class="text-base text-gray-900 dark:text-gray-200">{{ __($symptom->name) }}@if ($episode->symptoms->last() !== $symptom), @endif</span>
+                <span class="text-base text-gray-900 dark:text-gray-200">{{ __($symptom->symptom->name) }}@if ($episode->symptoms->last() !== $symptom), @endif</span>
             @endforeach
         </div>
 

@@ -16,6 +16,7 @@
                     <x-headline-primary>{{ __('Epilepsy-Tracker') }}</x-headline-primary>
                     <x-current-time />
                     <div class="flex gap-2 justify-end">
+                        <x-reload-button />
                         <x-theme-switch />
                         <x-simple-primary-button x-on:click="$dispatch('open-modal', 'show-form')">Neuer Eintrag</x-simple-primary-button>
                     </div>
@@ -33,7 +34,13 @@
 
             <div id="episodes" class="pt-5">
 
-                <h2 class="text-xl text-left pl-8">{{ __('Recent entries') }}</h2>
+                <h2 class="text-xl text-left pl-8">
+                    @if (count($episodes))
+                        {{ __('Recent entries') }}
+                    @else
+                        {{ __('No entries') }}
+                    @endif
+                </h2>
 
                 @foreach ($episodes as $episode)
                     <x-episode-item :episode="$episode" />
@@ -41,7 +48,9 @@
 
             </div>
 
-            <x-calendar :events="$events" class="min-h-80" />
+            @if (count($episodes))
+                <x-calendar :events="$events" class="min-h-80" />
+            @endif
 
         </div>
 

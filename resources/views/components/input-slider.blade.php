@@ -1,4 +1,4 @@
-<div x-data="{ value: {{ old($name, $value) }} }" class="relative block relative flex items-center space-x-4 p-4 sm:p-6 bg-gray-200 rounded-lg text-gray-900 dark:text-dark-600 font-bold">
+<div x-data="{ value: {{ old($name, $value) }} }" class="relative block relative flex items-center space-x-4 p-4 sm:p-6 bg-gray-200 rounded-lg text-gray-900 dark:text-gray-200 dark:bg-gray-700 font-lighter text-shadow-0">
 
     <input x-model="value" name="{{ $name }}" type="range" step="1" min="0" max="10" class="w-full" value="{{ old($name, $value) }} /">
 

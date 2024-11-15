@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class EpisodeTrigger
@@ -20,6 +21,11 @@ class EpisodeSymptom extends Model
 
     public function episodes()
     {
-        return $this->belongsToMany(Episode::class, 'episodes_episode_symptoms')->withPivot('timing')->withTimestamps();
+        return $this->belongsToMany(Episode::class, 'episodes_episode_symptoms')->withTimestamps();
+    }
+
+    public function timings()
+    {
+        return $this->hasMany(SymptomTiming::class);
     }
 }

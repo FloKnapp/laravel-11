@@ -6,6 +6,8 @@ use App\Models\Episode;
 use App\Models\EpisodeType;
 use App\Models\EpisodeSymptom;
 use App\Models\EpisodeTrigger;
+use App\Models\SymptomTiming;
+use App\Models\Timing;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EpisodeStoreRequest;
@@ -31,15 +33,11 @@ class EpisodeController extends Controller
      */
     public function store(EpisodeStoreRequest $request)
     {
-
         $rawType = $request->get('type');
         $rawIntensity = $request->get('intensity');
         $rawSymptoms = $request->get('symptoms');
         $rawTriggers = $request->get('triggers');
         $rawDuration = $request->get('duration');
-
-        $symptoms = $this->allOrCreate(EpisodeSymptom::class, $this->normalizeInput($rawSymptoms));
-        $triggers = $this->allOrCreate(EpisodeTrigger::class, $this->normalizeInput($rawTriggers));
 
         $type = EpisodeType::firstOrCreate(['name' => $rawType]);
 
@@ -48,8 +46,8 @@ class EpisodeController extends Controller
 
         $episode->types()->attach($type);
 
-        $this->attach($episode, 'symptoms', $symptoms);
-        $this->attach($episode, 'triggers', $triggers);
+        $this->processSymptoms($episode, $rawSymptoms);
+        $this->processTriggers($episode, $rawTriggers);
 
         $episode->save();
 
@@ -58,47 +56,26 @@ class EpisodeController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @param array $inputData
-     *
-     * @return array
-     */
-    private function normalizeInput(array $inputData): array
+    private function processSymptoms(Episode $episode, array $symptoms): void
     {
-        return collect($inputData)->reduce(function($result, $item) {
-            $result[]['name'] = $item;
-            return $result;
-        }, []);
-    }
+        foreach ($symptoms as $symptom => $data) {
+            $symptom = EpisodeSymptom::firstOrCreate(['name' => $symptom]);
+            $timing = Timing::firstOrCreate(['name' => $data['timing']]);
 
-    /**
-     * @param string $model
-     * @param array  $data
-     *
-     * @return array
-     */
-    private function allOrCreate(string $model, array $data): array
-    {
-        $result = [];
+            $symptomTiming = SymptomTiming::firstOrCreate([
+                'symptom_id' => $symptom->id,
+                'timing_id' => $timing->id
+            ]);
 
-        foreach ($data as $item) {
-            $result[] = $model::firstOrCreate($item);
+            $episode->symptoms()->attach($symptomTiming);
         }
-
-        return $result;
     }
 
-    /**
-     * @param Episode $episode
-     * @param string  $relation
-     * @param array   $models
-     *
-     * @return void
-     */
-    private function attach(Episode $episode, string $relation, array $models): void
+    private function processTriggers(Episode $episode, array $triggers): void
     {
-        foreach ($models as $model) {
-            $episode->$relation()->attach($model);
+        foreach ($triggers as $trigger) {
+            $model = EpisodeTrigger::firstOrCreate(['name' => $trigger]);
+            $episode->triggers()->attach($model->id);
         }
     }
 }

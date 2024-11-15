@@ -6,6 +6,7 @@ This application makes it possible for epilepsy patients to track their episodes
 
 # Requirements
 
+- PHP (on host)
 - Docker
 
 # Installation
@@ -14,6 +15,12 @@ Clone this repository to your desired destination. Run the following commands af
 
 ```bash
 $> ./vendor/bin/sail up -d 
+```
+
+### Execute Migrations
+
+```bash
+$> ./vendor/bin/sail artisan migrate
 ```
 
 ### Activate Watcher

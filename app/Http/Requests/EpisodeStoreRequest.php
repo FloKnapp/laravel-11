@@ -15,10 +15,12 @@ class EpisodeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'intensity' => 'required|integer|between:0,10',
-            'duration' => 'required|integer|between:1,600',
+            'intensity' => 'nullable|integer|between:0,10',
+            'duration' => 'nullable|integer|between:1,600',
+            'published_at' => 'nullable|date',
             'type' => 'required|string',
             'symptoms' => 'required|array|min:1',
+            'symptoms.*.timing' => 'required|string',
             'triggers' => [
                 'required',
                 function($attribute, $value, $fail) {

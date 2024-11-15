@@ -8,5 +8,9 @@
     "nothing": "Weiß nicht",
     "Episode successfully created!": "Episode erfolgreich gespeichert!",
     "Epilepsy-Tracker": "Epilepsie-Tracker",
-    "Recent entries": "Letzte Einträge"
+    "Recent entries": "Letzte Einträge",
+    "No entries": "Noch keine Einträge...",
+    "pre": "davor",
+    "during": "während",
+    "post": "danach"
 }
