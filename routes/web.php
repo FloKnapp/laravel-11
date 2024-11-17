@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
-Route::post('/episode', [EpisodeController::class, 'store'])->name('episode.store');
-Route::get('/episode/{publicId}', [EpisodeController::class, 'show'])->name('episode.show');
+Route::prefix('/episode')->group(function() {
+    Route::post('/', [EpisodeController::class, 'store'])->name('episode.store');
+    Route::get('/{publicId}', [EpisodeController::class, 'show'])->name('episode.show');
+});
 
 // Api
 Route::prefix('/api/v1')->group(function() {
-    Route::post('/episode/draft', [ApiEpisodeDraftController::class, 'store'])->name('episode.draft');
-    Route::resource('episode', ApiEpisodeController::class);
+    Route::post('/episode/draft', [ApiEpisodeDraftController::class, 'store'])->name('episode.api.draft');
+    Route::resource('episode.api', ApiEpisodeController::class);
 });
 
 // Admin

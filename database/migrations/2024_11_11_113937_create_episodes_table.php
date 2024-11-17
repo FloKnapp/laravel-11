@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('public_id')->nullable()->unique();
             $table->enum('state', [EpisodeStateType::DRAFT->value, EpisodeStateType::PUBLISHED->value]);
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->smallInteger('intensity', false, true)->nullable();
             $table->smallInteger('duration', false, true)->nullable();
             $table->timestamp('published_at')->nullable();

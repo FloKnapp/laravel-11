@@ -14,6 +14,7 @@ class WebsiteController extends Controller
     public function index(): View
     {
         $episodes = Episode::where('state', EpisodeStateType::PUBLISHED->value)
+            ->where('public_id', '!=', null)
             ->orderBy('id', 'desc')
             ->get();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\EpisodeStateType;
 use App\Models\Episode;
 use App\Models\EpisodeType;
 use App\Models\EpisodeSymptom;
@@ -41,7 +42,11 @@ class EpisodeController extends Controller
 
         $type = EpisodeType::firstOrCreate(['name' => $rawType]);
 
-        $episode = new Episode(['intensity' => $rawIntensity, 'duration' => $rawDuration]);
+        $episode = new Episode([
+            'intensity' => $rawIntensity,
+            'duration' => $rawDuration,
+            'state' => EpisodeStateType::PUBLISHED->value
+        ]);
         $episode->save();
 
         $episode->types()->attach($type);
