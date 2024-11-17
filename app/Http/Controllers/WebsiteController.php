@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\EpisodeStateType;
 use App\Models\Episode;
 use Illuminate\Contracts\View\View;
 
@@ -12,7 +13,9 @@ class WebsiteController extends Controller
      */
     public function index(): View
     {
-        $episodes = Episode::orderBy('id', 'desc')->get();
+        $episodes = Episode::where('state', EpisodeStateType::PUBLISHED->value)
+            ->orderBy('id', 'desc')
+            ->get();
 
         $events = [];
 
@@ -25,7 +28,7 @@ class WebsiteController extends Controller
             ];
         }
 
-        $episodes = $episodes->slice(0, 3);
+        $episodes = collect($episodes)->slice(0,3);
 
         return view('index', compact('events', 'episodes'));
     }

@@ -16,10 +16,16 @@ class Episode extends Model
 {
     protected $fillable = [
         'public_id',
+        'state',
         'intensity',
         'duration',
         'published_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function types()
     {

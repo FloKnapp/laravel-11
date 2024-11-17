@@ -1,20 +1,24 @@
 <?php
 
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\Api\EpisodeController as ApiEpisodeController;
+use App\Http\Controllers\Api\EpisodeDraftController as ApiEpisodeDraftController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
-use App\Models\Episode;
-use App\Models\EpisodeSymptom;
-use App\Models\EpisodeTrigger;
-use App\Models\EpisodeType;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
 Route::post('/episode', [EpisodeController::class, 'store'])->name('episode.store');
-Route::get('/episode/{id}', [EpisodeController::class, 'show'])->name('episode.show');
+Route::get('/episode/{publicId}', [EpisodeController::class, 'show'])->name('episode.show');
 
+// Api
+Route::prefix('/api/v1')->group(function() {
+    Route::post('/episode/draft', [ApiEpisodeDraftController::class, 'store'])->name('episode.draft');
+    Route::resource('episode', ApiEpisodeController::class);
+});
 
+// Admin
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -1,0 +1,10 @@
+GET http://localhost/api/v1/episode/87d9bec9-45cf-467a-9907-fa70acfb5840
+Accept: application/json
+###
+
+POST http://localhost/api/v1/episode/draft HTTP/1.1
+Content-Type: application/json
+
+{"client_id": "123"}
+###
+
