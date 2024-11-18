@@ -40,4 +40,24 @@ class EpisodeTest extends TestCase
         $this->assertDatabaseHas('episode_triggers', ['name' => 'TestTrigger']);
     }
 
+    public function test_episode_can_be_read_fully()
+    {
+        $data = ['intensity' => 5, 'duration' => 120, 'state' => 'published'];
+        $episode = Episode::create($data);
+
+        $type = EpisodeType::firstOrCreate(['name' => 'TestType']);
+        $trigger = EpisodeTrigger::firstOrCreate(['name' => 'TestTrigger']);
+
+        $episode->types()->attach($type);
+        $episode->triggers()->attach($trigger);
+
+        $episode->save();
+
+        $this->assertSame('TestType', $episode->types()->first()->name);
+        $this->assertSame('TestTrigger', $episode->triggers()->first()->name);
+
+        $this->assertContains($episode->id, array_column($type->episodes()->get()->toArray(), 'id'));
+
+    }
+
 }

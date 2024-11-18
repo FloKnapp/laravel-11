@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Feature;
+use App\Models\Episode;
 use Tests\TestCase;
 
 class WebsiteTest extends TestCase
@@ -12,6 +13,16 @@ class WebsiteTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertSee('Epilepsie-Tracker');
+    }
+
+    public function test_detail_page_is_rendered_successfully()
+    {
+        $episode = Episode::first();
+
+        $response = $this->get('/episode/' . $episode->public_id);
+        $response
+            ->assertStatus(200)
+            ->assertSee('Details');
     }
 
     public function test_episode_can_be_created_through_controller()
