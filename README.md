@@ -2,16 +2,28 @@
 
 # About this project
 
-This application makes it possible for epilepsy patients to track their episodes.
+This application let epilepsy patients track their episodes.
 
 # Requirements
 
-- PHP (on host)
+- Git
 - Docker
+
+#### Services being used in Docker
+
+- PHP 8.3
+- MariaDB 11
+- Mailpit (optional)
+- Redis (optional)
 
 # Installation
 
-Clone this repository to your desired destination. Run the following commands afterward from the root directory of the application:
+Clone this repository. Example:
+```bash
+git clone git@github.com:FloKnapp/laravel-11.git
+```
+
+Run the following commands from the root directory of the application (this could take a while):
 
 ```bash
 $> ./vendor/bin/sail up -d 
@@ -25,20 +37,14 @@ $> ./vendor/bin/sail artisan migrate
 
 ### Activate Watcher
 
-This could take a while, when everything is finished get access to the container with the following command:
+Start the vite bundler and file watcher:
 
 ```bash
-$> ./vendor/bin/sail root-shell
-```
-
-To watch for changes in the file system, execute the following command:
-
-```bash
-root@9164ad43723c$> npm run dev
+$> ./vendor/bin/sail npm run dev
 ```
 
 # Run Tests
 
 ```bash
-$> ./vendor/bin/phpunit -c phpunit.xml
+$> ./vendor/bin/sail test
 ```
