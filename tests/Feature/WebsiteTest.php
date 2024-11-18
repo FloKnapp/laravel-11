@@ -17,7 +17,6 @@ class WebsiteTest extends TestCase
     public function test_episode_can_be_created_through_controller()
     {
         $response = $this->post('/episode', [
-            'state' => 'published',
             'type' => 'absence',
             'symptoms' => [
                 'aura' => ['timing' => 'before'],

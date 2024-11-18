@@ -11,7 +11,7 @@ class EpisodeTest extends TestCase
 
     public function test_episode_can_be_created()
     {
-        $data = ['user_id' => null, 'intensity' => 5, 'duration' => 120];
+        $data = ['user_id' => null, 'intensity' => 5, 'duration' => 120, 'state' => 'published'];
         Episode::create($data);
         $this->assertDatabaseHas('episodes', $data);
     }
@@ -24,7 +24,7 @@ class EpisodeTest extends TestCase
 
     public function test_episode_can_be_created_fully()
     {
-        $data = ['intensity' => 5, 'duration' => 120];
+        $data = ['intensity' => 5, 'duration' => 120, 'state' => 'published'];
         $episode = Episode::create($data);
 
         $type = EpisodeType::create(['name' => 'TestType']);
