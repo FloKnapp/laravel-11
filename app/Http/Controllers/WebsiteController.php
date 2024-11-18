@@ -18,6 +18,7 @@ class WebsiteController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
+        // Calendar events
         $events = [];
 
         foreach ($episodes as $episode) {
@@ -29,6 +30,7 @@ class WebsiteController extends Controller
             ];
         }
 
+        // Only show the last 3 episodes
         $episodes = collect($episodes)->slice(0,3);
 
         return view('index', compact('events', 'episodes'));

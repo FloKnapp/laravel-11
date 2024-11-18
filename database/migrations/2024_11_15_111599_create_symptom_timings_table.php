@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('symptom_timings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('symptom_id')->constrained('episode_symptoms');
-            $table->foreignId('timing_id')->constrained('timings');
+            $table->foreignId('symptom_id')->constrained('episode_symptoms')->onDelete('cascade');
+            $table->foreignId('timing_id')->constrained('timings')->onDelete('cascade');
             $table->unique(['symptom_id', 'timing_id']);
             $table->timestamps();
         });

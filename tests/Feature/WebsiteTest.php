@@ -11,7 +11,7 @@ class WebsiteTest extends TestCase
         $response = $this->get('/');
         $response
             ->assertStatus(200)
-            ->assertSee(' Epilepsie-Tracker');
+            ->assertSee('Epilepsie-Tracker');
     }
 
     public function test_episode_can_be_created_through_controller()

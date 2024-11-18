@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
             $table->uuid('public_id')->nullable()->unique();
-            $table->enum('state', [EpisodeStateType::DRAFT->value, EpisodeStateType::PUBLISHED->value]);
+            $table->enum('state', [EpisodeStateType::DRAFT->value, EpisodeStateType::PUBLISHED->value])->default(EpisodeStateType::DRAFT->value);
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->smallInteger('intensity', false, true)->nullable();
             $table->smallInteger('duration', false, true)->nullable();

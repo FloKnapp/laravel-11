@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('episodes_episode_triggers', function (Blueprint $table) {
-            $table->foreignId('episode_id')->constrained('episodes');
-            $table->foreignId('episode_trigger_id')->constrained('episode_triggers');;
+            $table->foreignId('episode_id')->constrained('episodes')->onDelete('cascade');
+            $table->foreignId('episode_trigger_id')->constrained('episode_triggers')->onDelete('cascade');
             $table->unique(['episode_id', 'episode_trigger_id']);
             $table->timestamps();
         });

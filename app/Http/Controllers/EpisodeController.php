@@ -34,21 +34,19 @@ class EpisodeController extends Controller
      */
     public function store(EpisodeStoreRequest $request)
     {
-        $rawType = $request->get('type');
+        $rawType      = $request->get('type');
         $rawIntensity = $request->get('intensity');
-        $rawSymptoms = $request->get('symptoms');
-        $rawTriggers = $request->get('triggers');
-        $rawDuration = $request->get('duration');
+        $rawSymptoms  = $request->get('symptoms');
+        $rawTriggers  = $request->get('triggers');
+        $rawDuration  = $request->get('duration');
 
-        $type = EpisodeType::firstOrCreate(['name' => $rawType]);
-
-        $episode = new Episode([
+        $episode = Episode::create([
             'intensity' => $rawIntensity,
             'duration' => $rawDuration,
             'state' => EpisodeStateType::PUBLISHED->value
         ]);
-        $episode->save();
 
+        $type = EpisodeType::firstOrCreate(['name' => $rawType]);
         $episode->types()->attach($type);
 
         $this->processSymptoms($episode, $rawSymptoms);

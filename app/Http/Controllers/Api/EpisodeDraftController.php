@@ -22,7 +22,6 @@ class EpisodeDraftController extends Controller
     public function store(Request $request)
     {
         $episode = Episode::create();
-        $episode->save();
 
         return response()->json($episode->public_id);
     }
