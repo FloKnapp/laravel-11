@@ -4,6 +4,8 @@
 
 This application let epilepsy patients track their episodes.
 
+![Preview](public/preview.png)
+
 # Requirements
 
 - Git
