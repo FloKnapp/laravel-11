@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Slider styles */
+
+/* Range line valid for both, Webkit and Mozilla */
 input[type="range"] {
     @apply bg-gray-300 dark:bg-gray-600 h-2 rounded-lg;
     margin-top: 0;
 }
 
+/* Handle for Mozilla */
 input[type="range"]::-moz-range-thumb {
     @apply bg-gray-400 dark:bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer transition-all;
 }
@@ -19,7 +23,7 @@ input[type="range"]:active::-moz-range-thumb {
     @apply bg-blue-500 dark:bg-blue-500;
 }
 
-/* Stil für den Schieberegler (Handle) */
+/* Handle for Webkit */
 input[type="range"]::-webkit-slider-thumb {
     @apply bg-blue-400 dark:bg-gray-500 border-none w-6 h-6 rounded-full cursor-pointer;
 }
@@ -34,21 +38,22 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 /* Calendar */
 
-/* Border around each month */
-.fc .fc-multimonth {
-    border: none;
-}
-
-.fc .fc-multimonth-multicol .fc-multimonth-month {
-    @apply pl-0 border-0;
-}
-
 /* Displayed year */
 .fc .fc-toolbar-title {
     @apply text-gray-700 dark:text-gray-200;
 }
 
-/* Displayed month */
+/* Border around each month */
+.fc .fc-multimonth {
+    border: none;
+}
+
+/* Whole month including title */
+.fc .fc-multimonth-multicol .fc-multimonth-month {
+    @apply pl-0 border-0;
+}
+
+/* Month title */
 .fc .fc-multimonth-title {
     @apply text-gray-700 dark:text-gray-200;
 }
@@ -67,6 +72,11 @@ input[type="range"]:active::-webkit-slider-thumb {
 /* Title of each column (usually weekdays) */
 .fc .fc-col-header-cell.fc-day {
     @apply text-gray-700 dark:text-gray-200 text-xs font-normal;
+}
+
+/* Table of containing days */
+.fc .fc-daygrid .fc-multimonth-daygrid-table {
+    @apply border-none;
 }
 
 /* Background of day column */

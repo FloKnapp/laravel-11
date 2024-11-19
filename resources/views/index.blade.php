@@ -6,7 +6,7 @@
             $flashMessage = session('status');
         @endphp
 
-        <div class="p-4 sm:py-6 sm:p-8 bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
+        <div class="p-4 sm:py-6 sm:p-8 bg-white dark:bg-gray-800 sm:rounded-lg">
 
             <x-data-container class="text-gray-900 dark:text-gray-200">
 
@@ -19,6 +19,7 @@
                     <div class="flex gap-2 justify-end">
                         <x-reload-button />
                         <x-theme-switch />
+                        <x-profile-switch />
                         <x-simple-primary-button x-on:click="$dispatch('open-modal', 'show-form')">Neuer Eintrag</x-simple-primary-button>
                     </div>
                 </div>

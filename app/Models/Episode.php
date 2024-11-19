@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class Episode extends Model
 {
     protected $fillable = [
+        'user_id',
         'public_id',
         'state',
         'intensity',

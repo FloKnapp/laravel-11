@@ -13,6 +13,7 @@ use App\Models\Timing;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EpisodeStoreRequest;
+use Illuminate\Support\Facades\Auth;
 
 class EpisodeController extends Controller
 {
@@ -24,8 +25,15 @@ class EpisodeController extends Controller
      */
     public function show(string $publicId): View
     {
-        $episode = Episode::where('public_id', '=', $publicId)->firstOrFail();
-        return view('episode-details', compact('episode'));
+        if (Auth::check()) {
+            $user = Auth::user();
+            $episode = Episode::where('public_id', '=', $publicId)
+                ->where('user_id', '=', $user->id)
+                ->firstOrFail();
+            return view('episode-details', compact('episode'));
+        }
+
+        return view('not-authorized');
     }
 
     /**
@@ -35,16 +43,23 @@ class EpisodeController extends Controller
      */
     public function store(EpisodeStoreRequest $request)
     {
+        if (! Auth::check()) {
+            return redirect(route('home'));
+        }
+
         $rawType      = $request->get('type');
         $rawIntensity = $request->get('intensity');
         $rawSymptoms  = $request->get('symptoms');
         $rawTriggers  = $request->get('triggers');
         $rawDuration  = $request->get('duration');
+        $rawPublished = $request->get('published_at');
 
         $episode = Episode::create([
-            'intensity' => $rawIntensity,
-            'duration' => $rawDuration,
-            'state' => EpisodeStateType::PUBLISHED->value
+            'user_id'      => Auth::user()->id,
+            'state'        => EpisodeStateType::PUBLISHED->value,
+            'intensity'    => $rawIntensity,
+            'duration'     => $rawDuration,
+            'published_at' => $rawPublished,
         ]);
 
         $type = EpisodeType::firstOrCreate(['name' => $rawType]);
@@ -69,18 +84,15 @@ class EpisodeController extends Controller
             $symptom = Symptom::firstOrCreate(['name' => $symptom]);
             $timing = Timing::firstOrCreate(['name' => $timing]);
 
-            $episodeSymptom = EpisodeSymptom::firstOrCreate([
+            EpisodeSymptom::firstOrCreate([
                 'episode_id' => $episode->id,
                 'symptom_id' => $symptom->id
             ]);
 
-            $symptomTiming = SymptomTiming::firstOrCreate([
+            SymptomTiming::firstOrCreate([
                 'symptom_id' => $symptom->id,
                 'timing_id' => $timing->id
             ]);
-
-            $episodeSymptom->save();
-            $symptomTiming->save();
         }
     }
 
