@@ -7,6 +7,7 @@ use App\Models\Episode;
 use App\Models\EpisodeType;
 use App\Models\EpisodeSymptom;
 use App\Models\EpisodeTrigger;
+use App\Models\Symptom;
 use App\Models\SymptomTiming;
 use App\Models\Timing;
 use Illuminate\Contracts\View\View;
@@ -62,15 +63,24 @@ class EpisodeController extends Controller
     private function processSymptoms(Episode $episode, array $symptoms): void
     {
         foreach ($symptoms as $symptom => $data) {
-            $symptom = EpisodeSymptom::firstOrCreate(['name' => $symptom]);
-            $timing = Timing::firstOrCreate(['name' => $data['timing']]);
+
+            $timing = $data['timing'];
+
+            $symptom = Symptom::firstOrCreate(['name' => $symptom]);
+            $timing = Timing::firstOrCreate(['name' => $timing]);
+
+            $episodeSymptom = EpisodeSymptom::firstOrCreate([
+                'episode_id' => $episode->id,
+                'symptom_id' => $symptom->id
+            ]);
 
             $symptomTiming = SymptomTiming::firstOrCreate([
                 'symptom_id' => $symptom->id,
                 'timing_id' => $timing->id
             ]);
 
-            $episode->symptoms()->attach($symptomTiming);
+            $episodeSymptom->save();
+            $symptomTiming->save();
         }
     }
 

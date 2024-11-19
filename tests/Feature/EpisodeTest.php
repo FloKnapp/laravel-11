@@ -2,8 +2,12 @@
 
 namespace Tests\Feature;
 use App\Models\Episode;
+use App\Models\EpisodeSymptom;
 use App\Models\EpisodeTrigger;
 use App\Models\EpisodeType;
+use App\Models\Symptom;
+use App\Models\SymptomTiming;
+use App\Models\Timing;
 use Tests\TestCase;
 
 class EpisodeTest extends TestCase
@@ -27,8 +31,8 @@ class EpisodeTest extends TestCase
         $data = ['intensity' => 5, 'duration' => 120, 'state' => 'published'];
         $episode = Episode::create($data);
 
-        $type = EpisodeType::create(['name' => 'TestType']);
-        $trigger = EpisodeTrigger::create(['name' => 'TestTrigger']);
+        $type = EpisodeType::firstOrCreate(['name' => 'TestType']);
+        $trigger = EpisodeTrigger::firstOrCreate(['name' => 'TestTrigger']);
 
         $episode->types()->attach($type);
         $episode->triggers()->attach($trigger);
@@ -46,6 +50,12 @@ class EpisodeTest extends TestCase
         $episode = Episode::create($data);
 
         $type = EpisodeType::firstOrCreate(['name' => 'TestType']);
+        $symptom = Symptom::firstOrCreate(['name' => 'TestSymptom']);
+        EpisodeSymptom::firstOrCreate(['episode_id' => $episode->id, 'symptom_id' => $symptom->id]);
+
+        $timing = Timing::firstOrCreate(['name' => 'pre']);
+        SymptomTiming::firstOrCreate(['symptom_id' => $symptom->id, 'timing_id' => $timing->id]);
+
         $trigger = EpisodeTrigger::firstOrCreate(['name' => 'TestTrigger']);
 
         $episode->types()->attach($type);
@@ -57,6 +67,8 @@ class EpisodeTest extends TestCase
         $this->assertSame('TestTrigger', $episode->triggers()->first()->name);
 
         $this->assertContains($episode->id, array_column($type->episodes()->get()->toArray(), 'id'));
+        $this->assertContains($episode->id, array_column($trigger->episodes()->get()->toArray(), 'id'));
+        //$this->assertContains($episode->id, array_column($timing->symptoms()->first()->symptom()->episodes()->get()->toArray(), 'id'));
 
     }
 

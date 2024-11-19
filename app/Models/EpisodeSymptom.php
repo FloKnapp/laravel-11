@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class EpisodeTrigger
@@ -16,16 +15,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class EpisodeSymptom extends Model
 {
     protected $fillable = [
-        'name',
+        'episode_id',
+        'symptom_id'
     ];
 
-    public function episodes()
+    public function episode()
     {
-        return $this->belongsToMany(Episode::class, 'episodes_episode_symptoms')->withTimestamps();
+        return $this->belongsTo(Episode::class);
     }
 
-    public function timings()
+    public function symptom()
     {
-        return $this->hasMany(SymptomTiming::class);
+        return $this->belongsTo(Symptom::class);
     }
 }
