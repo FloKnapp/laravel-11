@@ -2,8 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class SymptomTiming
+ * @package App\Models
+ * @author  Florian Knapp <office@florianknapp.de>
+ *
+ * @mixin Builder
+ */
 class SymptomTiming extends Model
 {
 
