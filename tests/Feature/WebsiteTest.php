@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 use App\Models\Episode;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class WebsiteTest extends TestCase
@@ -15,19 +17,19 @@ class WebsiteTest extends TestCase
             ->assertSee('Epilepsie-Tracker');
     }
 
-    public function test_detail_page_is_rendered_successfully()
+    public function test_detail_page_is_denied_for_unauthorized_user()
     {
         $episode = Episode::first();
 
         $response = $this->get('/episode/' . $episode->public_id);
-        $response
-            ->assertStatus(200)
-            ->assertSee('Details');
+        $response->assertStatus(403);
     }
 
     public function test_episode_can_be_created_through_controller()
     {
-        $response = $this->post('/episode', [
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/episode/create', [
             'type' => 'absence',
             'symptoms' => [
                 'aura' => ['timing' => 'before'],
@@ -44,9 +46,21 @@ class WebsiteTest extends TestCase
         $response->assertRedirectToRoute('home');
     }
 
+    public function test_detail_page_is_accessible_for_authorized_user()
+    {
+        $episode = Episode::where('user_id', '!=', null)->first();
+        $user = User::findOrFail($episode->user_id);
+
+        $response = $this->actingAs($user)->get('/episode/' . $episode->public_id);
+        $response
+            ->assertStatus(200)
+            ->assertSee('Details');
+    }
+
     public function test_episodes_can_be_shown_through_controller()
     {
-        $response = $this->get('/');
+        $user = User::firstOrFail();
+        $response = $this->actingAs($user)->get('/');
         $response
             ->assertStatus(200)
             ->assertSee('Letzte Einträge');

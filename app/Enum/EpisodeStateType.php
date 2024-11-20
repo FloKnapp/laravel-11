@@ -9,4 +9,6 @@ enum EpisodeStateType: string
 
     case PUBLISHED = 'published';
 
+    case DELETED = 'deleted';
+
 }

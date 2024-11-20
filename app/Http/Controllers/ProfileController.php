@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Episode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,17 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Display the user's dashboard.
+     *
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('profile.index');
+    }
+
     /**
      * Display the user's profile form.
      */

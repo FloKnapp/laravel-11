@@ -12,5 +12,7 @@
     "No entries": "Noch keine Einträge...",
     "pre": "davor",
     "during": "während",
-    "post": "danach"
+    "post": "danach",
+    "auth.failed": "Keinen Nutzer mit diesen Zugangsdaten gefunden",
+    "welcome.user": "Willkommen, :name!"
 }

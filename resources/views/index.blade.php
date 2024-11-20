@@ -17,16 +17,18 @@
                     <x-flash-message>{{ __($flashMessage) }}</x-flash-message>
 
                     <div class="flex gap-2 justify-end">
-                        <x-reload-button />
-                        <x-theme-switch />
                         <x-profile-switch />
-                        <x-simple-primary-button x-on:click="$dispatch('open-modal', 'show-form')">Neuer Eintrag</x-simple-primary-button>
+                        @if (auth()->check())
+                            <x-simple-primary-button x-on:click="$dispatch('open-modal', 'show-form')">Neuer Eintrag</x-simple-primary-button>
+                        @endif
                     </div>
                 </div>
 
-                <x-modal name="show-form" :show="$errors->any()">
-                    <x-episode-form></x-episode-form>
-                </x-modal>
+                @if (auth()->check())
+                    <x-modal name="show-form" :show="$errors->any()">
+                        <x-episode-form></x-episode-form>
+                    </x-modal>
+                @endif
 
             </x-data-container>
 
